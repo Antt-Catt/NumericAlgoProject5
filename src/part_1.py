@@ -64,6 +64,9 @@ def splint(xa, ya, y2a, n, x):
     y = a * ya[klo] + b * ya[khi] + ((a ** 3 - a) * y2a[klo] + (b ** 3 - b) * y2a[khi]) * (h ** 2) / 6
     return y
 
+def interp(xa, ya, y2, n):
+        return lambda x: splint(xa, ya, y2, n, x)
+
 if __name__ == "__main__":
 
     def f(x):
@@ -77,9 +80,6 @@ if __name__ == "__main__":
 
     def k(x):
         return x**4 + 3*x**5
-
-    def interp(xa, ya, y2, n):
-        return lambda x: splint(xa, ya, y2, n, x)
 
     n = 50
     x = np.linspace(-1, 1, n)
@@ -178,7 +178,7 @@ if __name__ == "__main__":
 
     plt.scatter(ex, ey)
     plt.scatter(ix, iy)
-    plt.ylim(-0.3, 0.3)
+    plt.ylim(-0.2, 0.2)
 
     ########################################
     # for ex and ey
