@@ -113,4 +113,14 @@ plt.legend()
 plt.ylim([1.5,2.5])
 plt.show()
 
+# Length of plane curves 
+def L(f,a,b,method=integration_n_Simpson):
+    def derivative(g,x):
+        h = 1e-4
+        return (g(x+h) - g(x-h))/(2*h) 
+    def function(x):
+        return (1+derivative(f, x))**0.5
+    return method(function,a,b,10)
+
+    
 

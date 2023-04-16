@@ -2,9 +2,16 @@ import load_foil as lf
 import numpy as np
 import matplotlib.pyplot as plt
 import part_1 as p1
+import part_2 as p2
+
+
+air_density = 1.293
 
 def f_lambda(l, h, f):
     return lambda x: (1 - l) * f(x) + l * 3 * h
+
+def pression(f,a,b):
+    return 1/2 + air_density*p2.L(f,a, b)
 
 if __name__ == "__main__":
     (dim, ex, ey, ix, iy) = lf.load_foil("bacnlf.dat")
