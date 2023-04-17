@@ -18,11 +18,19 @@ $\int_{a}^{b}f(x)dx = \frac{h}{6}(f(a)+f(b)) +\frac{2h}{3}\sum_{k=0}^{k=n-1}f(x_
 with $I_{h}$ the trapezoidal approximation of $\int_{a}^{b}f(x)dx $ using $\frac{a-b}{h}$ interval.
 
 \subsection{Convergence analysis}
+\label{section}
 Once we validated the different integration methods on various polynomial and non-polynomial functions, we proceeded to analyze their convergence for a specific polynomial integral $ I = \int_{0}^{2}(x^{3} -3x +2)dx$. To do so, we evaluated the integral approximation for different values of the number $N$ of intervals, and studied how the accuracy of the approximation improved as we increased $N$. \\
-\begin{figure}[h]
+According to Figure \ref{fig:speed}, the Simpson's method displays a faster convergence than the trapezoidal and rectangle methods. In fact, for $N=10$, the Simpson's method achieves an error of about $10^{-16}$, while the trapezoidal method yields an error of $0.04$, and the midpoint method yields an error of $0.01$. On the other hand, the left and right rectangle methods converge much more slowly.These results could be justified by the fact that the Simpson's method approximates the curve with quadratic polynomials, while the other methods use linear approximations.\\
+\begin{figure}[H]
+  \label{fig:speed}
   \centering
   \includegraphics[width=0.8\textwidth]{tex/speed_convergence.png}
-  \caption{Approximations of the integral in function of the number $N$ of intervals I using the different methods }
-  \label{fig:speed}
+  \caption{Approximations of the integral in function of the number $N$ of intervals I using the different methods }  
 \end{figure}
-According to Figure \ref{fig:speed}, the Simpson's method displays a faster convergence than the trapezoidal and rectangle methods. In fact, for $N=10$, the Simpson's method achieves an error of about $10^{-16}$, while the trapezoidal method yields an error of $0.04$, and the midpoint method yields an error of $0.01$. On the other hand, the left and right rectangle methods converge much more slowly.These results could be justified by the fact that the Simpson's method approximates the curve with quadratic polynomials, while the other methods use linear approximations.
+
+\subsection{Length of the plane curves} 
+In section~\ref{section}, it was found that the Simpson method is a suitable numerical integration method for approximating the length of splines, as it provides fast convergence and high accuracy. This method can be used to approximate the integral $\int \sqrt{1+f'(x)^{2}}dx$, which is used to determine the length of the spline.
+
+To approximate the derivative of the function f, we utilized the central difference formula $f'(x) = \frac{f'(x+h) - f'(x-h)}{2h}$, which uses the values of the function at points slightly to the left and right of the point at which the derivative is being approximated. This formula has an error of order 2, which means that the accuracy of the approximation improves as the step size h becomes smaller.
+
+
