@@ -93,25 +93,26 @@ print(f"Adaptive integration with epsilon={eps}: Approximate integral = {approx_
 
 # Convergence graphs
 
-X = [ k  for k in range(2,50)]
-Exact = [2 for i in range(2,50)]
-Ytrap = [ integration_n_trapezoidal(polynomial, a, b, x) for x in X]
-Ymid = [integration_n_midlepoint(polynomial, a, b, x) for x in X]
-Ysimp = [integration_n_Simpson(polynomial, a, b, x) for x in X]
-Yleft = [integration_n_left(polynomial, a, b, x) for x in X]
-Yright = [integration_n_right(polynomial, a, b, x) for x in X]
-
-plt.plot(X,Ytrap,label = "Trapezoidal")
-plt.plot(X,Ymid,label = "Midpoint")
-plt.plot(X, Ysimp, label = "Simpson")
-plt.plot(X,Yleft,label = "Right rectangle")
-plt.plot(X,Yright, label = "Left rectangle")
-plt.plot(X,Exact,label="exact integral", color ="black")
-
-
-plt.legend()
-plt.ylim([1.5,2.5])
-plt.show()
+if __name__ == "__main__":
+    X = [ k  for k in range(2,50)]
+    Exact = [2 for i in range(2,50)]
+    Ytrap = [ integration_n_trapezoidal(polynomial, a, b, x) for x in X]
+    Ymid = [integration_n_midlepoint(polynomial, a, b, x) for x in X]
+    Ysimp = [integration_n_Simpson(polynomial, a, b, x) for x in X]
+    Yleft = [integration_n_left(polynomial, a, b, x) for x in X]
+    Yright = [integration_n_right(polynomial, a, b, x) for x in X]
+    
+    plt.plot(X,Ytrap,label = "Trapezoidal")
+    plt.plot(X,Ymid,label = "Midpoint")
+    plt.plot(X, Ysimp, label = "Simpson")
+    plt.plot(X,Yleft,label = "Right rectangle")
+    plt.plot(X,Yright, label = "Left rectangle")
+    plt.plot(X,Exact,label="exact integral", color ="black")
+    
+    
+    plt.legend()
+    plt.ylim([1.5,2.5])
+    plt.show()
 
 # Length of plane curves 
 def L(f,a,b,method=integration_n_Simpson):
