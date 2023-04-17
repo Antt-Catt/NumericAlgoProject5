@@ -16,4 +16,13 @@ $\int_{a}^{b}f(x)dx  = \frac{h}{2}(f(a) + f(b)) + h\sum_{k=1}^{k=n} f(x_{k}) = I
 Simpson's method is a numerical integration technique that approximates the area under a curve by dividing the region into an even number of subintervals and fitting a second-degree polynomial to each pair of consecutive points on the curve. By computing the area under each parabolic segment and summing them up, we can obtain an estimation of the integral. Simpson's method is known to be more accurate than the rectangle and trapezoidal methods, especially for curves that are quadratic or less, as it can provide exact results in such cases. The formula for Simpson's method is : \\
 $\int_{a}^{b}f(x)dx = \frac{h}{6}(f(a)+f(b)) +\frac{2h}{3}\sum_{k=0}^{k=n-1}f(x_{i} +\frac{h}{2})  + \frac{h}{3}\sum_{k=0}^{k=n-1} f(x_{i}) = \frac{4}{3}I_{\frac{h}{2}} - \frac{1}{3}I_{h} $ \\
 with $I_{h}$ the trapezoidal approximation of $\int_{a}^{b}f(x)dx $ using $\frac{a-b}{h}$ interval.
- 
+
+\subsection{Convergence analysis}
+Once we validated the different integration methods on various polynomial and non-polynomial functions, we proceeded to analyze their convergence for a specific polynomial integral $ I = \int_{0}^{2}(x^{3} -3x +2)dx$. To do so, we evaluated the integral approximation for different values of the number $N$ of intervals, and studied how the accuracy of the approximation improved as we increased $N$. \\
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{tex/speed_convergence.png}
+  \caption{Approximations of the integral in function of the number $N$ of intervals I using the different methods }
+  \label{fig:speed}
+\end{figure}
+According to Figure \ref{fig:speed}, the Simpson's method displays a faster convergence than the trapezoidal and rectangle methods. In fact, for $N=10$, the Simpson's method achieves an error of about $10^{-16}$, while the trapezoidal method yields an error of $0.04$, and the midpoint method yields an error of $0.01$. On the other hand, the left and right rectangle methods converge much more slowly.These results could be justified by the fact that the Simpson's method approximates the curve with quadratic polynomials, while the other methods use linear approximations.
