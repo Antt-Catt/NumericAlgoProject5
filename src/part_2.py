@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import math
 
 def integration_n_trapezoidal(f,a,b,N):
     s=(f(a) +f(b))*0.5
@@ -116,10 +117,10 @@ plt.show()
 # Length of plane curves 
 def L(f,a,b,method=integration_n_Simpson):
     def derivative(g,x):
-        h = 1e-4
-        return (g(x+h) - g(x-h))/(2*h) 
+        h = 1e-3
+        return (g(x+h) - g(x))/(h) 
     def function(x):
-        return (1+derivative(f, x))**0.5
+        return math.sqrt(1+derivative(f, x)**2)
     return method(function,a,b,10)
 
     
