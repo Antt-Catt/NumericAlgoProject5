@@ -9,14 +9,11 @@ air_density = 1.293
 def f_lambda(l, h, f):
     return lambda x: (1 - l) * f(x) + l * 3 * h
 
-def t_lambda(l, h, f):
-    return lambda x: -(1 - l) * f(x) - l * 3 * h
-
 def pressure(f, a, b):
     return 1/2 + air_density * (p2.L(f, a, b))**2
 
 if __name__ == "__main__":
-    (dim, ex, ey, ix, iy) = lf.load_foil("bacnlf.dat")
+    (dim, ex, ey, ix, iy) = lf.load_foil("du84132v.dat")
     
     ########################################
     # for ex and ey
@@ -68,16 +65,16 @@ if __name__ == "__main__":
         else:
             plt.plot(x_high, y_high, color = 'k')
             plt.plot(x_low, y_low, color = 'k')
+            
 
-    
-    plt.ylim(-0.15, 0.2)
+    plt.ylim(-0.15, 0.3)
     plt.show()
 
     press_high = [pressure(f, xint[0], xint[-1]) for f in functions_high]
     press_low = [pressure(f, xint[0], xint[-1]) for f in functions_low]
 
     X = np.linspace(0, 1, 100)
-    Y = np.linspace(-0.15, 0.2, 100)
+    Y = np.linspace(-0.15, 0.3, 100)
     Z = np.full((100, 100), min(min(press_high), min(press_low)))
 
     # Remplissage du tableau 2D avec les coefficients
@@ -85,16 +82,16 @@ if __name__ == "__main__":
         for x in X:
             for y in Y:
                 if (functions_high[i](x) < y):
-                    Z[int((y + 0.15) * (100 - 0) / (0.2 + 0.15)) - 1, int(x * 99)] = press_high[i]
+                    Z[int((y + 0.15) * (100 - 0) / (0.3 + 0.15)) - 1, int(x * 99)] = press_high[i]
 
     for i in range(len(functions_low)):
         for x in X:
             for y in Y:
                 if (functions_low[i](x) > y):
-                    Z[int((y + 0.15) * (100 - 0) / (0.2 + 0.15)), int(x * 99)] = press_low[i]
+                    Z[int((y + 0.15) * (100 - 0) / (0.3 + 0.15)), int(x * 99)] = press_low[i]
 
     # Affichage de la carte des coefficients
-    plt.imshow(Z, origin='lower', extent=(0, 1, -0.15, 0.2), aspect='auto', cmap='hot')
+    plt.imshow(Z, origin='lower', extent=(0, 1, -0.15, 0.3), aspect='auto', cmap='hot')
     plt.colorbar()
     plt.xlabel('X')
     plt.ylabel('Y')

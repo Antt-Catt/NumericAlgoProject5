@@ -120,7 +120,7 @@ plt.show()
 
 # Length of plane curves 
 def L(f,a,b,method=integration_n_Simpson):
-    def function():
+    def function(x):
         h = 1e-3
-        return lambda x: math.sqrt(1 + (f(x + h) - f(x - h))/(2 * h) * (f(x + h) - f(x - h))/(2 * h))
-    return method(function(),a,b,20)
+        return math.sqrt(1 + (f(x + h) - f(x - h))/(2 * h) * (f(x + h) - f(x - h))/(2 * h))
+    return method(function,a,b,10)
