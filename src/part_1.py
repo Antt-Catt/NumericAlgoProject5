@@ -187,8 +187,8 @@ if __name__ == "__main__":
     x = ex
     y = ey
     
-    yp1 = (y[1] - y[0]) / (x[1] - x[0])
-    ypn = (y[n - 1] - y[n - 2]) / (x[n - 1] - x[n - 2])
+    yp1 = 1e30 # to have second derivative = 0
+    ypn = 1e30 
 
     res = spline(x, y, n, yp1, ypn)
         
@@ -200,7 +200,6 @@ if __name__ == "__main__":
         yint[i] = fint(xint[i])
     
     plt.plot(xint, yint)
-    print(yint)
 
     ########################################
     # for ix and iy
@@ -209,8 +208,8 @@ if __name__ == "__main__":
     x = ix
     y = iy
 
-    yp1 = (y[1] - y[0]) / (x[1] - x[0])
-    ypn = (y[n - 1] - y[n - 2]) / (x[n - 1] - x[n - 2])
+    yp1 = 1e30
+    ypn = 1e30
     
     res = spline(x, y, n, yp1, ypn)
     

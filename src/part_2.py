@@ -18,12 +18,7 @@ def integration_n_midlepoint(f,a,b,N):
     return s
 
 def integration_n_Simpson(f,a,b,N):
-    s=(f(a) +f(b))*(1/6) 
-    h = (b-a)/N
-    s += (2/3)*f(a+ h/2)
-    for i in range(1,N):
-        s+= 2/3 *f(a + i*h + h/2) + f(a+i*h)/3
-    return h*s
+    return (4/3) *integration_n_trapezoidal(f, a, b, N//2) -  (1/3) * integration_n_trapezoidal(f, a, b, N)
 
 def integration_n_left(f, a, b, N):
     h = (b-a)/N
@@ -99,7 +94,8 @@ print(f"Adaptive integration with epsilon={eps}: Approximate integral = {approx_
 
 # Convergence graphs
 
-X = [ k  for k in range(2,30)]
+X = [ k  for k in range(2,50)]
+Exact = [2 for i in range(2,50)]
 Ytrap = [ integration_n_trapezoidal(polynomial, a, b, x) for x in X]
 Ymid = [integration_n_midlepoint(polynomial, a, b, x) for x in X]
 Ysimp = [integration_n_Simpson(polynomial, a, b, x) for x in X]
@@ -111,6 +107,7 @@ plt.plot(X,Ymid,label = "Midpoint")
 plt.plot(X, Ysimp, label = "Simpson")
 plt.plot(X,Yleft,label = "Right rectangle")
 plt.plot(X,Yright, label = "Left rectangle")
+plt.plot(X,Exact,label="exact integral", color ="black")
 
 
 plt.legend()
@@ -118,14 +115,8 @@ plt.ylim([1.5,2.5])
 plt.show()
 
 # Length of plane curves 
-
-def L(f,a,b,method=integration_n_Simpson):
-    def derivative(g,x):
+def L(f,a,b,method=integration_n_midlepoint):
+    def function():
         h = 1e-3
-        return (g(x+h) - g(x))/(h) 
-    def function(x):
-        return math.sqrt(1+derivative(f, x)**2)
-    return method(function,a,b,10)
-
-    
-
+        return lambda x: math.sqrt(1 + (f(x + h) - f(x - h))/(2 * h) * (f(x + h) - f(x - h))/(2 * h))
+    return method(function(),a,b,20)
