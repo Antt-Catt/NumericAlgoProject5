@@ -40,15 +40,16 @@ if __name__ == "__main__":
     hmin = min(iy)
     hmax = max(ey)
     
-    x_upp = np.linspace(ex[0], ex[int(dim[0]) - 1], 100)
+    x_upp = np.linspace(ex[0], ex[-1], 100)
     y_upp = np.zeros(100)
     
-    x_low = np.linspace(ix[0], ix[int(dim[1]) - 1], 100)
+    x_low = np.linspace(ix[0], ix[-1], 100)
     y_low = np.zeros(100)
 
     functions_upp = []
     functions_low = []
-    
+
+    # filling functions arrays with interpolate functions
     for i in range(20):
         f_upp = f_lambda(i / 20, hmax, fint_upp)
         functions_upp.append(f_upp)
@@ -70,6 +71,7 @@ if __name__ == "__main__":
     plt.ylim(-0.15, 0.3)
     plt.show()
 
+    # compute the pressure (constant for each function) all along the interpolate functions
     press_upp = [pressure(f, xint[0], xint[-1]) for f in functions_upp]
     press_low = [pressure(f, xint[0], xint[-1]) for f in functions_low]
 
@@ -77,7 +79,7 @@ if __name__ == "__main__":
     Y = np.linspace(-0.15, 0.3, 100)
     Z = np.full((100, 100), min(min(press_upp), min(press_low)))
 
-    # Remplissage du tableau 2D avec les coefficients
+    # filling Z with pressures
     for i in range(len(functions_upp)):
         for x in X:
             for y in Y:
@@ -90,7 +92,6 @@ if __name__ == "__main__":
                 if (functions_low[i](x) > y):
                     Z[int((y + 0.15) * 100 / (0.3 + 0.15)), int(x * 99)] = press_low[i]
 
-    # Affichage de la carte des coefficients
     plt.imshow(Z, origin='lower', extent=(0, 1, -0.15, 0.3), aspect='auto', cmap='hot')
     plt.colorbar()
     plt.xlabel('X')

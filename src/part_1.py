@@ -5,8 +5,11 @@ import matplotlib.pyplot as plt
 # This function is the translation of the function in the Numerical Recipies in python
 # Input :
 # x and y such as f(x[i]) = y[i] with f the function to interpolate
+# n the number of points in x and y
 # yp1 the first derivative of the unterpolating function at point 1
 # ypn the first derivative of the unterpolating function at point n
+# Output :
+# y2 the array of the second derivatives
 def spline(x, y, n, yp1, ypn):
     u = np.zeros(n)
 
@@ -17,7 +20,7 @@ def spline(x, y, n, yp1, ypn):
     else:
         y2[0] = -0.5
         u[0] = (3 / (x[1] - x[0])) * ((y[1] - y[0]) / (x[1] - x[0]) - yp1)
-
+        
     for i in range(1, n-1):
         sig = (x[i] - x[i - 1]) / (x[i + 1] - x[i - 1])
         p = sig * y2[i - 1] + 2.0
@@ -38,6 +41,14 @@ def spline(x, y, n, yp1, ypn):
 
     return y2
 
+
+# This function is the translation of the function in the Numerical Recipies in python
+# Input :
+# xa and ya such as f(xa[i]) = ya[i] with f the function to interpolate
+# y2a the array of the second derivatives
+# x the abscissa of the point we want to get the image of through f
+# Output :
+# y such as y = f(x)
 
 def splint(xa, ya, y2a, n, x):
     def nrerror(error_text):
@@ -64,6 +75,10 @@ def splint(xa, ya, y2a, n, x):
     y = a * ya[klo] + b * ya[khi] + ((a ** 3 - a) * y2a[klo] + (b ** 3 - b) * y2a[khi]) * (h ** 2) / 6
     return y
 
+# Input :
+# xa, ya, y2, n as described in function splint
+# Output :
+# a function giving the image of x through the interpolating function
 def interp(xa, ya, y2, n):
         return lambda x: splint(xa, ya, y2, n, x)
 
@@ -98,7 +113,7 @@ if __name__ == "__main__":
     xint = np.linspace(-1, 1, 1000)
     yint = np.zeros(1000)
     
-    for i in range(1000):
+    for i in range(1000): # numerical verifications
         yint[i] = fint(xint[i])
         if abs(yint[i] - f(xint[i])) > 1e-5:
             print("Not enough accurate")
@@ -118,7 +133,7 @@ if __name__ == "__main__":
     xint = np.linspace(-1, 1, 1000)
     yint = np.zeros(1000)
     
-    for i in range(1000):
+    for i in range(1000): # numerical verifications
         yint[i] = fint(xint[i])
         if abs(yint[i] - g(xint[i])) > 1e-5:
             print("Not enough accurate")
@@ -140,7 +155,7 @@ if __name__ == "__main__":
     xint = np.linspace(-1, 1, 1000)
     yint = np.zeros(1000)
     
-    for i in range(1000):
+    for i in range(1000): # numerical verifications
         yint[i] = fint(xint[i])
         if abs(yint[i] - h(xint[i])) > 1e-5:
             print("Not enough accurate")
@@ -161,7 +176,7 @@ if __name__ == "__main__":
     xint = np.linspace(-1, 1, 1000)
     yint = np.zeros(1000)
     
-    for i in range(1000):
+    for i in range(1000): # numerical verifications
         yint[i] = fint(xint[i])
         if abs(yint[i] - k(xint[i])) > 1e-5:
             print("Not enough accurate")
@@ -208,7 +223,7 @@ if __name__ == "__main__":
     x = ix
     y = iy
 
-    yp1 = 1e30
+    yp1 = 1e30 # to have second derivative = 0
     ypn = 1e30
     
     res = spline(x, y, n, yp1, ypn)
