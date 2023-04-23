@@ -174,7 +174,7 @@ if __name__ == "__main__":
 
     ##################################################
     # tests for airfoil
-    (dim, ex, ey, ix, iy) = lf.load_foil("bacnlf.dat")
+    (dim, ex, ey, ix, iy) = lf.load_foil("du84132v.dat")
 
     plt.scatter(ex, ey)
     plt.scatter(ix, iy)
