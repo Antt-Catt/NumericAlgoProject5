@@ -1,10 +1,8 @@
-\large \emph{\textbf{Antton Cattarin}}
-
 The first part of this project discusses the use of cubic spline interpolation. This algorithm was used to interpolate a series of points representing an airfoil. Between each point, the algorithm computes a polynomial with a degree at most 3. The final interpolation is a continuous function passing by all the points. This algorithm was implemented with the help of \emph{Numerical Recipes}. Figure \ref{fig:interp} below illustrates the results for known functions.
 
-\begin{figure}[H]
+\begin{figure}[h]
   \centering
-  \includegraphics[width=0.8\textwidth]{img/interpolations.png}
+  \includegraphics[width=0.45\textwidth]{img/interpolations.png}
   \caption{Cubic interpolations of known functions}
   \label{fig:interp}
 \end{figure}
@@ -16,9 +14,9 @@ These results are visually significant as the curves look like the functions. Th
 
 Following that, the cubic spline algorithm was used to compute functions representing an airfoil. A series of points has been given in a file. This algorithm was applied to these points, and a function was identified. This function and the points can be observed in Figure \ref{fig:airfoil}.
 
-\begin{figure}[H]
+\begin{figure}[h]
   \centering
-  \includegraphics[width=0.8\textwidth]{img/airfoil_interp.png}
+  \includegraphics[width=0.45\textwidth]{img/airfoil_interp.png}
   \caption{Cubic interpolations of the airfoil}
   \label{fig:airfoil}
 \end{figure}
