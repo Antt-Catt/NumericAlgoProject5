@@ -1,5 +1,3 @@
-\large \emph{\textbf{Abdelhafid Guerouani}}
-
 In this part, we have implemented five different integration methods to compute the length of plane curves defined by an integral. The objective is to optimize the measurement of the curves by choosing the appropriate method in terms of speed and convergence.
 Selecting the right integration method is crucial for achieving accurate and efficient results. Therefore, we have tested and compared the performance of each method to determine which one is most suitable for our application.
 \subsection{Integration methods}
@@ -23,9 +21,9 @@ with $I_{h}$ the trapezoidal approximation of $\int_{a}^{b}f(x)dx $ using $\frac
 \label{section}
 Once we validated the different integration methods on various polynomial and non-polynomial functions, we proceeded to analyze their convergence for a specific polynomial integral $ I = \int_{0}^{2}(x^{3} -3x +2)dx$. To do so, we evaluated the integral approximation for different values of the number $N$ of intervals, and studied how the accuracy of the approximation improved as we increased $N$. \\
 According to Figure \ref{fig:speed}, the Simpson's method displays a faster convergence than the trapezoidal and rectangle methods. In fact, for $N=10$, the Simpson's method achieves an error of about $10^{-16}$, while the trapezoidal method yields an error of $0.04$, and the midpoint method yields an error of $0.01$. On the other hand, the left and right rectangle methods converge much more slowly.These results could be justified by the fact that the Simpson's method approximates the curve with quadratic polynomials, while the other methods use linear approximations.\\
-\begin{figure}[H]
+\begin{figure}[h]
   \centering
-  \includegraphics[width=0.8\textwidth]{img/speed_convergence.png}
+  \includegraphics[width=0.45\textwidth]{img/speed_convergence.png}
   \caption{Approximations of the integral in function of the number $N$ of intervals I using the different methods}
   \label{fig:speed}
 \end{figure}
